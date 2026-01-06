@@ -1,39 +1,23 @@
+use fjs_util_macros::generate_file_string;
+
 pub fn get_routes_json_bytes() -> Vec<u8> {
-    let text = format!("\
-{{
-    \"/\":\"root\"
-}}");
-    text.into_bytes()
+    let text = generate_file_string!("default/routes.json");
+    text.to_ascii_lowercase()
 }
 
 pub fn get_root_html_bytes() -> Vec<u8> {
-    let text = format!("\
-<!DOCTYPE html>
-<html lang=\"\">
-  <head>
-    <meta charset=\"utf-8\">
-    <title>TEST PAGE</title>
-  </head>
-  <body>
-    <header></header>
-    <main></main>
-    <footer></footer>
-  </body>
-</html>
-");
-    text.into_bytes()
+    let text = generate_file_string!("default/index.html");
+    text.to_ascii_lowercase()
 }
 
 pub fn get_root_css_bytes() -> Vec<u8> {
-    let text = format!("\
-");
-    text.into_bytes()
+    let text = generate_file_string!("default/index.css");
+    text.to_ascii_lowercase()
 }
 
 pub fn get_root_js_bytes() -> Vec<u8> {
-    let text = format!("\
-");
-    text.into_bytes()
+    let text = generate_file_string!("default/index.js");
+    text.to_ascii_lowercase()
 }
 
 pub fn get_fs_server_start_bytes() -> Vec<u8> {

@@ -1,0 +1,8 @@
+[package]
+name = "fjs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+fjs_util_macros = { path = "../fjs_util_macros" }
+serde_json = "1.0.148"
