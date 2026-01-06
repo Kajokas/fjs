@@ -12,7 +12,9 @@ fn build_prj(path: String, build_extra_route: Option<String>) {
 
     let routes: Vec<(String, String)> = get_routes(build_extra_route);
 
-    file_bytes.extend_from_slice(&utils::get_fs_server_start_bytes());
+    let fs_server_bytes = utils::get_fs_server_file_bytes();
+
+    file_bytes.extend_from_slice(&utils::get_fs_server_start_bytes(fs_server_bytes));
     file_bytes.extend_from_slice(&utils::get_fs_page_route_byte(routes));
     file_bytes.extend_from_slice(&utils::get_fs_server_end_bytes("3000"));
 

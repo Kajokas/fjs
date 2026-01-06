@@ -2,40 +2,37 @@ use fjs_util_macros::generate_file_string;
 
 pub fn get_routes_json_bytes() -> Vec<u8> {
     let text = generate_file_string!("default/routes.json");
-    text.to_ascii_lowercase()
+    text.to_vec()
 }
 
 pub fn get_root_html_bytes() -> Vec<u8> {
     let text = generate_file_string!("default/index.html");
-    text.to_ascii_lowercase()
+    text.to_vec()
 }
 
 pub fn get_root_css_bytes() -> Vec<u8> {
     let text = generate_file_string!("default/index.css");
-    text.to_ascii_lowercase()
+    text.to_vec()
 }
 
 pub fn get_root_js_bytes() -> Vec<u8> {
     let text = generate_file_string!("default/index.js");
-    text.to_ascii_lowercase()
+    text.to_vec()
 }
 
-pub fn get_fs_server_start_bytes() -> Vec<u8> {
-let a = String::from("\
-        package main
-
-import (
-    \"net/http\"
-)
-
-func serve_page(path string, folder string) {
-    http.Handle(path, http.FileServer(http.Dir(folder)))
+pub fn get_fs_server_file_bytes() -> Vec<u8> {
+    let text = generate_file_string!("default/main.go");
+    text.to_vec()
 }
 
-func main() {
-    ");
+pub fn get_fs_server_start_bytes(fs_server_bytes: Vec<u8>) -> Vec<u8> {
+    let a = String::from_utf8(fs_server_bytes).expect("Counldn't convert fs to string");
+    let b:Vec<&str> = a.split("@@GENERATE_CODE").collect();
+    let b = b.first().expect("Missing\"@@GENERATE_CODE\"");
 
-    a.into_bytes()
+    println!("{:?}", b);
+
+    String::from(*b).into_bytes()
 }
 
 pub fn get_fs_page_route_byte(routes: Vec<(String, String)>) -> Vec<u8> {
