@@ -2,6 +2,11 @@ use std::fs;
 
 use proc_macro::{Literal, TokenStream, TokenTree};
 
+/// Takes file path to file pressent in bin/ (the directory name of fjs cli bin) and returns its
+/// bytes.
+///
+/// Because Rust macros only trigger with code change just changing the file will not update the
+/// bytes returned by this macro.
 #[proc_macro]
 pub fn generate_file_string(input: TokenStream) -> TokenStream {
     let mut file_bytes: Literal = Literal::byte_string(b"");
