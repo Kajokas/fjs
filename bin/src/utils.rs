@@ -17,9 +17,7 @@ pub fn get_fs_page_route_byte(routes: Vec<(String, String)>) -> Vec<u8> {
     let mut text: String = String::new(); 
     
     for (r, p) in routes.iter() {
-        let a = format!("\
-            serve_page(\"{}\", \"./{}/\")
-    ", r, p);
+        let a = format!("serve_page(\"{}\", \"./{}/\")\n    ", r, p);
         text.push_str(a.as_str());
     }
 
@@ -27,9 +25,6 @@ pub fn get_fs_page_route_byte(routes: Vec<(String, String)>) -> Vec<u8> {
 }
 
 pub fn get_fs_server_end_bytes(port: &str) -> Vec<u8> {
-    let text = format!("\
-    http.ListenAndServe(\":{}\", nil)
-}}
-", port);
+    let text = format!("http.ListenAndServe(\":{}\", nil)\n}}", port);
     text.into_bytes()
 }

@@ -1,5 +1,5 @@
 use crate::opts::*;
-use std::{env};
+use std::env;
 
 pub mod utils;
 pub mod opts;
@@ -13,6 +13,7 @@ fn main() {
     }
 
     match args[1].as_str() {
+        "new" => todo!("Implement a way to generate components"),
         "init" => init::init(args),
         "run" => run::run(),
         "build" => {
