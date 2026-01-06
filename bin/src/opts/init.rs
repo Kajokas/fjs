@@ -1,5 +1,5 @@
 use std::{fs::{self, File}, io::Write};
-use super::utils;
+use fjs_util_macros::generate_file_string;
 
 fn create_prj(path: String) {
     let filename = format!("{}/routes.json", path.as_str());
@@ -7,7 +7,7 @@ fn create_prj(path: String) {
 
     let mut file_bytes: Vec<u8> = Vec::new(); 
 
-    file_bytes.extend_from_slice(&utils::get_routes_json_bytes());
+    file_bytes.extend_from_slice(generate_file_string!("default/routes.json"));
 
     routes_file.write(&file_bytes).expect("Failed to write data to routes.json");
 
@@ -28,9 +28,9 @@ fn create_root(path: &str) {
     let mut root_css_file = File::create(css_filename).expect("Failed to make file css file");
     let mut root_js_file = File::create(js_filename).expect("Failed to make file js file");
 
-    root_html_file.write(&utils::get_root_html_bytes()).expect("Failed to write data to file");
-    root_css_file.write(&utils::get_root_css_bytes()).expect("Failed to write data to file");
-    root_js_file.write(&utils::get_root_js_bytes()).expect("Failed to write data to file");
+    root_html_file.write(generate_file_string!("default/index.html")).expect("Failed to write data to file");
+    root_css_file.write(generate_file_string!("default/index.css")).expect("Failed to write data to file");
+    root_js_file.write(generate_file_string!("default/index.js")).expect("Failed to write data to file");
 }
 
 pub fn init(args: Vec<String>) {
